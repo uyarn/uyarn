@@ -1,0 +1,23 @@
+.article{
+  margin: 2rem 15%;
+  text-align: left;
+  h3, h5, p{
+    margin-bottom: 1rem;
+  }
+  p{
+    text-align: left;
+    color:#777;
+  }
+}
+@media (max-width:768px){
+  .article{
+    h3{
+    margin-left:0;
+    margin-right: 0;
+    font-size: 0.9rem!important;
+  }
+  p,code{
+    font-size: 0.5rem;
+  }
+}
+}

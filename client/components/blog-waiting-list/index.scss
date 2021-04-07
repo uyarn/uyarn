@@ -1,0 +1,26 @@
+@keyframes Rotate {
+  from {transform:rotate(0);}
+  to {transform:rotate(360deg);}
+}
+@-webkit-keyframes Rotate
+{
+  from {transform:rotate(0);}
+  to {transform:rotate(360deg);}
+}
+.waitlist{
+  margin: 0px auto;
+  width: 10%;
+  img{
+        width: 100%;
+        animation: Rotate 1s reverse infinite;
+        -webkit-animation:Rotate 1s reverse infinite;
+      }
+}
+@media(max-width:768px){
+  .waitlist{
+    width:20%;
+    p{
+      font-size: 0.5rem;
+    }
+  }
+}

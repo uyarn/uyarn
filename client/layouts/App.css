@@ -1,0 +1,38 @@
+/* Base Application Styles */
+
+html {
+  height: 100%;
+  font-size: 20px;
+}
+
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#app {
+  height: 100%;
+  position: relative;
+}
+
+.yarn-root {
+  height: 100%;
+
+}
+.yarn-page{
+   position: relative;
+   height: 100%;
+   overflow: scroll;
+}
+footer{
+  background:#f8f8f8;
+  border-top: 1px solid #e7e7e7;
+  height: 2rem;
+
+}
+
+p{
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 0 0;
+}

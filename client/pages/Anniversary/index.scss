@@ -1,0 +1,11 @@
+.anniver {
+  width: 50%;
+  margin: 0px auto;
+}
+
+@media (max-width: 768px) {
+  .anniver {
+    margin-top: 5rem;
+    width: 80%;
+  }
+}

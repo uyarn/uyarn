@@ -1,0 +1,4 @@
+node_modules
+dist
+**.mp4
+.DS_Store

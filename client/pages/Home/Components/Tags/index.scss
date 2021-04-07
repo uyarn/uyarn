@@ -1,0 +1,22 @@
+@keyframes spanTran {
+  from {transform:scale(1);}
+  to {transform:scale(1.2);}
+}
+@-webkit-keyframes spanTran
+{
+  from {transform:scale(1);}
+  to {transform:scale(1.2);}
+}
+
+
+.tag-cloud{
+  text-align: center;
+  span{
+    cursor: pointer;
+
+  }
+  span:hover{
+    animation: spanTran 0.5s;
+    -webkit-animation: spanTran 0.5s;
+  }
+}

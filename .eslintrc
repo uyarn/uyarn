@@ -1,0 +1,4 @@
+{
+  "extends": ["alloy", "alloy/react"],
+  "include": ["client"]
+}
