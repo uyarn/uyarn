@@ -38,7 +38,7 @@ function getDefaultModules() {
       {
         test: /\.ts(x)$/,
         include: path.join(__dirname, "../client"),
-        loader: ["babel-loader", "awesome-typescript-loader"],
+        loader: ["awesome-typescript-loader"],
       },
       {
         test: /\.(js|jsx)$/,

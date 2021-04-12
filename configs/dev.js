@@ -7,11 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 
 const config = Object.assign({}, baseConfig, {
-  entry: [
-    "webpack-dev-server/client?http://127.0.0.1:" + defaultSettings.port,
-    "webpack/hot/only-dev-server",
-    "./client/index",
-  ],
+  entry: ["./client/index"],
   cache: false,
   devServer: {
     hot: true,

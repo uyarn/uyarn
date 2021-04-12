@@ -9,7 +9,7 @@ const defaultSettings = require("./default");
 
 let config = Object.assign({}, baseConfig, {
   entry: {
-    app: path.join(__dirname, "../client/index.js"),
+    app: path.join(__dirname, "../client/index"),
   },
   cache: false,
   output: {

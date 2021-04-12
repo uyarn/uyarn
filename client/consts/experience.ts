@@ -1,4 +1,4 @@
-export const resumes = [
+const RESUME = [
   {
     name: "DLUT",
     period: "2013.9 ~ 2017.7",
@@ -28,3 +28,5 @@ export const resumes = [
     detail: "CDC-墨子工作室",
   },
 ];
+
+export default RESUME;

@@ -20,6 +20,8 @@ module.exports = {
       "@/components": `${defaultSettings.srcPath}/components`,
       "@/statics": `${defaultSettings.srcPath}/statics`,
       "@/consts": `${defaultSettings.srcPath}/consts`,
+      "@/apis": `${defaultSettings.srcPath}/apis`,
+      "@/http": `${defaultSettings.srcPath}/http`,
       config:
         `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV,
       "react/lib/ReactMount": "react-dom/lib/ReactMount",

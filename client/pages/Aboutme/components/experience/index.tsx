@@ -4,7 +4,7 @@ import Pie from "recharts/es6/polar/Pie";
 
 import experCircle from "./circle";
 
-import { resumes as data } from "@/consts";
+import { RESUME as data } from "@/consts";
 
 import "./index.scss";
 
@@ -23,7 +23,6 @@ export default function Experience() {
           cy={100}
           innerRadius={50}
           outerRadius={60}
-          fill={data.color}
           onClick={(val, idx) => setActiveIndex(idx)}
         />
       </PieChart>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import routes from "../router";
-import { Header } from "../components";
+import { Header } from "@/components";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";

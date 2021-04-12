@@ -25,11 +25,11 @@ const Header = ({ dropdownOpen, toggleDrop }) => {
                   <li>
                     <Link to="/aboutme">about</Link>
                   </li>
+                  <li>
+                    <Link to="/blogs">blog</Link>
+                  </li>
                   {/* <li>
                     <Link to="/gadgets">gadgets</Link>
-                  </li> */}
-                  {/* <li>
-                    <Link to="/blogs">blog</Link>
                   </li> */}
                 </ul>
               </DropdownMenu>
@@ -47,11 +47,11 @@ const Header = ({ dropdownOpen, toggleDrop }) => {
               <li>
                 <Link to="/aboutme">about</Link>
               </li>
+              <li>
+                <Link to="/blogs">blog</Link>
+              </li>
               {/* <li>
                 <Link to="/gadgets">gadgets</Link>
-              </li> */}
-              {/* <li>
-                <Link to="/blogs">blog</Link>
               </li> */}
             </ul>
           </div>
