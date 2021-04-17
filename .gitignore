@@ -3,3 +3,5 @@ dist
 **.mp4
 .DS_Store
 client/consts/graphql.ts
+
+yarn-error.log
