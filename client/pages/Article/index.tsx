@@ -1,7 +1,9 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useQuery, gql } from "@apollo/client";
+import get from "lodash/get";
 
+import { Spin } from "@/components";
 import "./index.scss";
 
 interface IArticleProps {
@@ -25,9 +27,15 @@ function Article(props: IArticleProps) {
     }
   `;
   const { loading, error, data } = useQuery(graphql);
-  return (
+  const issue1 = get(data, "viewer.repository.issue1") || {};
+  const { title, createdAt, body } = issue1;
+  return loading ? (
+    <Spin />
+  ) : (
     <div className="article">
-      <ReactMarkdown>{data?.viewer?.repository?.issue1?.body}</ReactMarkdown>
+      <h1>{title}</h1>
+      <h4 style={{ color: "#ccc" }}>{createdAt?.split("T")[0]}</h4>
+      <ReactMarkdown>{body ? body : "编写中..📚"}</ReactMarkdown>
     </div>
   );
 }

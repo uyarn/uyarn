@@ -5,7 +5,7 @@ import "./index.scss";
 const Spin = () => (
   <div className="waitlist">
     <div>
-      <img src={require("../../../statics/uyarn.png")} alt="uyarn" />
+      <img src={require("../../statics/uyarn.png")} alt="uyarn" />
     </div>
   </div>
 );
