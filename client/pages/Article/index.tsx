@@ -16,7 +16,7 @@ function Article(props: IArticleProps) {
   const graphql = gql`
     query {
       viewer {
-        repository(name: "blogs") {
+        repository(name: "uyarn") {
           issue1: issue(number: ${issueId}) {
             title
             createdAt
