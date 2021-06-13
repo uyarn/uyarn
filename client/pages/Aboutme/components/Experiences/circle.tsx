@@ -1,5 +1,6 @@
-import Sector from "recharts/es6/shape/Sector";
 import React from "react";
+
+import Sector from "recharts/es6/shape/Sector";
 
 const experCircle = (props) => {
   const RADIAN = Math.PI / 180;

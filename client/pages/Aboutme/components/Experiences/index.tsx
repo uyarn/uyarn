@@ -13,7 +13,6 @@ export default function Experience() {
 
   return (
     <div className="experience">
-      <h3>Experience</h3>
       <PieChart width={300} height={200}>
         <Pie
           activeIndex={activeIndex}
@@ -23,7 +22,7 @@ export default function Experience() {
           cy={100}
           innerRadius={50}
           outerRadius={60}
-          onClick={(val, idx) => setActiveIndex(idx)}
+          onClick={(_val, idx: number) => setActiveIndex(idx)}
         />
       </PieChart>
       <p>{data[activeIndex].detail}</p>

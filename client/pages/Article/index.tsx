@@ -26,7 +26,7 @@ function Article(props: IArticleProps) {
       }
     }
   `;
-  const { loading, error, data } = useQuery(graphql);
+  const { loading, data } = useQuery(graphql);
   const issue1 = get(data, "viewer.repository.issue1") || {};
   const { title, createdAt, body } = issue1;
   return loading ? (
