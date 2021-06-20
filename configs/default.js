@@ -36,7 +36,7 @@ function getDefaultModules() {
           "file-loader?limit=2048&name=assets/videos/[hash:8].[name].[ext]",
       },
       {
-        test: /\.ts(x)$/,
+        test: /\.(ts|tsx)$/,
         include: path.join(__dirname, "../client"),
         loader: ["awesome-typescript-loader"],
       },

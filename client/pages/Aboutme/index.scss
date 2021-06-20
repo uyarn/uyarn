@@ -1,23 +1,24 @@
-.aboutme{
+.aboutme {
   width: 100%;
   background: #fff;
-  color:#000;
-  padding:2rem 10rem;
-  font-weight: bold;
+  color: #000;
+  padding: 2rem 10rem;
   text-align: center;
-  h3,h5{
+  h3,
+  h5 {
     text-align: left;
   }
-  h4,h5{
+  h4,
+  h5 {
     margin-bottom: 0.25rem;
   }
-
-
+  p {
+    font-weight: normal;
+  }
 }
 
-@media (max-width:768px){
-  .aboutme{
-    padding:0 1rem;
-
+@media (max-width: 768px) {
+  .aboutme {
+    padding: 0 1rem;
   }
 }

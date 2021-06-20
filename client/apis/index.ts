@@ -1,1 +1,2 @@
-export { GET_BLOG_LIST_FROM_GITHUB } from "./get-blog-list";
+export { getBlogList } from "./get-blog-list";
+export { getBlogDetail } from "./get-blog-detail";

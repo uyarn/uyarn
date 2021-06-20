@@ -1,31 +1,39 @@
 const RESUME = [
   {
-    name: "DLUT",
+    name: "大连理工大学",
     period: "2013.9 ~ 2017.7",
-    color: "#286fb7",
-    value: 300,
-    detail: "大连理工大学",
+    color: "#286FB7",
+    value: new Date("2017-07-01").getTime() - new Date("2013-09-01").getTime(),
+    type: 'edu',
+    detail: "Bachelor Degree",
+    location: 'Dalian, China'
   },
   {
-    name: "曼彻斯特大学",
+    name: "University of Manchester",
     period: "2017.9 ~ 2019.01",
     color: "#660099",
-    value: 100,
-    detail: "Manchester UK",
+    value: new Date("2019-01-01").getTime() - new Date("2017-09-01").getTime(),
+    type: 'edu',
+    detail: "Master Degree",
+    location: 'Manchester, UK'
   },
   {
-    name: "@美团",
+    name: "@Meituan",
     period: "2019.1 ~ 2021.1",
     color: "#EEBE00",
-    value: 300,
+    value: new Date("2021-01-01").getTime() - new Date("2019-01-01").getTime(),
+    type: 'work',
     detail: "美团民宿",
+    location: 'Xiamen, China'
   },
   {
-    name: "@腾讯",
-    period: "2021.2 ~ now",
-    color: "#286fb7",
-    value: 300,
-    detail: "CDC-墨子工作室",
+    name: "@Tencent",
+    period: "2021.3 ~ now",
+    color: "#286FB7",
+    value: Date.now() - new Date("2021-03-01").getTime(),
+    type: 'work',
+    detail: "Tencent CDC",
+    location: 'Shenzhen, China'
   },
 ];
 

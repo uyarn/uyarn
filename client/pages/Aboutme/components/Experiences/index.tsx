@@ -9,7 +9,7 @@ import { RESUME as data } from "@/consts";
 import "./index.scss";
 
 export default function Experience() {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(3);
 
   return (
     <div className="experience">
@@ -25,7 +25,11 @@ export default function Experience() {
           onClick={(_val, idx: number) => setActiveIndex(idx)}
         />
       </PieChart>
-      <p>{data[activeIndex].detail}</p>
+      <p>
+        {data?.[activeIndex]?.type === "edu" ? "👨‍🎓" : "👨‍💻"}
+        {data?.[activeIndex]?.detail}
+      </p>
+      <p>📍 {data?.[activeIndex]?.location}</p>
     </div>
   );
 }

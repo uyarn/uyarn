@@ -1,16 +1,22 @@
 import { gql } from "@apollo/client";
 
-export const GET_BLOG_LIST_FROM_GITHUB = gql`
+export const getBlogList = gql`
   query {
     viewer {
       repository(name: "uyarn") {
-        issues(last: 20) {
+        issues(first: 20) {
           edges {
             node {
               id
               title
               number
               createdAt
+              labels(first: 10) {
+                nodes {
+                  name
+                  color
+                }
+              }
             }
           }
         }

@@ -1,4 +1,4 @@
-import { Home, AboutMe, Blog, Anniver, Article } from "../pages";
+import { Home, AboutMe, Blog, Anniver, Article, Projects } from "../pages";
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
     exact: true,
   },
   {
-    path: "/article/:id",
+    path: "/blogs/:id",
     component: Article,
     exact: true,
   },
@@ -26,11 +26,11 @@ const routes = [
     component: Anniver,
     exact: true,
   },
-  // {
-  //   path: "/gadgets",
-  //   component: TableVis,
-  //   exact: true,
-  // },
+  {
+    path: "/projects",
+    component: Projects,
+    exact: true,
+  },
 ];
 
 export default routes;

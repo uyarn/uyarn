@@ -1,6 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { getBlogDetail } from "@/apis";
 import get from "lodash/get";
 
 import { Spin } from "@/components";
@@ -13,20 +14,8 @@ interface IArticleProps {
 function Article(props: IArticleProps) {
   const issueId = props?.match?.params?.id;
 
-  const graphql = gql`
-    query {
-      viewer {
-        repository(name: "uyarn") {
-          issue1: issue(number: ${issueId}) {
-            title
-            createdAt
-            body
-          }
-        }
-      }
-    }
-  `;
-  const { loading, data } = useQuery(graphql);
+  const { loading, data } = useQuery(getBlogDetail(issueId));
+
   const issue1 = get(data, "viewer.repository.issue1") || {};
   const { title, createdAt, body } = issue1;
   return loading ? (
