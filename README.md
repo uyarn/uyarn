@@ -1,4 +1,7 @@
-Hi there, I am [Uyarn](http://uyarn.me) <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px">
+```sh
+~
+$ cat uyarn/uyarn/README.md
+```
 
 - Graduated from DLUT and UoM in 2019👨‍🎓
 - Living in Shenzhen, China and working at @Tencent 💻
