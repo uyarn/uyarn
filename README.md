@@ -3,7 +3,7 @@
 $ cat uyarn/uyarn/README.md
 ```
 
-- Graduated from DLUT and UoM in 2019👨‍🎓
+- Graduated from DLUT and UoM in 2019 👨‍🎓
 - Living in Shenzhen, China and working at @Tencent 💻
 - Supporter of Liverpool FC and play soccer as well ⚽️
 
