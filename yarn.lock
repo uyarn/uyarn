@@ -7061,6 +7061,11 @@ react-transition-group@^2.3.1, react-transition-group@^2.5.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react-use-firework@^1.0.0-beta.1:
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/react-use-firework/-/react-use-firework-1.0.0-beta.1.tgz#ad8458d1d3546ae8e49305ac40d9113d297ed2c1"
+  integrity sha512-6SWsk/fDbRvi2B7Ku1PAYcChd3Ywq4Q1CyboRXEDnAkKSDckpLB3pmoE6aGahWutTR3aAxgUOzhHiSAswWDNWA==
+
 react@^16.8.0:
   version "16.14.0"
   resolved "https://registry.npm.taobao.org/react/download/react-16.14.0.tgz?cache=0&sync_timestamp=1617812143675&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
