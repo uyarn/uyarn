@@ -1,4 +1,12 @@
 {
-  "extends": ["alloy", "alloy/react"],
-  "include": ["client"]
+  "extends": [
+    "alloy",
+    "alloy/react"
+  ],
+  "include": [
+    "client"
+  ],
+  "rules": {
+    "no-unused-vars": "error"
+  }
 }
