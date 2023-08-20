@@ -7,12 +7,15 @@ export interface IRouter {
   title?: string;
   Component?: React.FC<BrowserRouterProps>;
   children?: IRouter[];
+  meta?: {
+    hidden?: boolean;
+  };
 }
 
 const routes: IRouter[] = [
   {
     path: '/',
-    redirect: '/about',
+    redirect: '/posts',
   },
   {
     path: '/about',
@@ -20,15 +23,25 @@ const routes: IRouter[] = [
     Component: lazy(() => import('@/pages/about/index')),
   },
   {
-    path: '/projects',
-    title: 'Projects',
-    Component: lazy(() => import('@/pages/projects/index')),
+    path: '/posts',
+    title: 'Posts',
+    Component: lazy(() => import('@/pages/posts/index')),
   },
   {
-    path: '/blogs',
-    title: 'Blogs',
-    Component: lazy(() => import('@/pages/blogs/index')),
+    path: '/posts/:id',
+    Component: lazy(() => import('@/pages/post-content/index')),
+    meta: { hidden: true },
   },
+  // {
+  //   path: '/projects',
+  //   title: 'Projects',
+  //   Component: lazy(() => import('@/pages/projects/index')),
+  // },
+  // {
+  //   path: '/resume',
+  //   title: 'Resume',
+  //   Component: lazy(() => import('@/pages/resume/index')),
+  // },
 ];
 
 export default routes;

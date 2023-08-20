@@ -32,3 +32,5 @@ function useMode() {
 }
 
 export default useMode;
+
+export type TModeType = ReturnType<typeof useMode>;

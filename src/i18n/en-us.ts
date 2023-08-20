@@ -1,8 +1,9 @@
 export default {
   about: {
-    name: 'I am Uyarn (pronounce as wū yāng)',
-    location: 'Currently I live in Shenzhen, China🇨🇳',
-    work: 'I am a senior front-end engineer services Working at Tencent，是个勤劳的前端码农，未来希望自己是个全栈开发者',
-    favorite: '利物浦20年球迷',
+    name: ['宇扬', 'wū yāng', 'Uyarn'],
+    location: 'Currently I live in Shenzhen, China',
+    work: 'Working at Tencent',
+    major: ['Front-end Developer', 'Software Engineer'],
+    tags: ['Play Soccer', 'Liverpool Hardcore Fan', 'Tesla Supporter', 'Weekend Cook'],
   },
 };

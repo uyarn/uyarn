@@ -10,13 +10,14 @@ export enum ELang {
 }
 
 function useLang() {
-  const [lang, setLang] = useState<ELang | undefined>(undefined);
+  const [lang, setLang] = useState<ELang | undefined>(ELang.zhCN);
   const [currentText, setCurrentText] = useState<Record<string, any>>(cn);
 
   useEffect(() => {
     const text = lang === ELang.zhCN ? cn : en;
     setCurrentText(text);
   }, [lang]);
+
   return {
     lang,
     setLang,
@@ -25,3 +26,5 @@ function useLang() {
 }
 
 export default useLang;
+
+export type TLangType = ReturnType<typeof useLang>;

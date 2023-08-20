@@ -1,22 +1,28 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { Layout } from 'tdesign-react';
 import Content from './Content';
 import Header from './Header';
 import useLang from '@/hooks/useLang';
+import useMode from '@/hooks/useMode';
+
+import RootContext from './rootContext';
 
 const { Footer } = Layout;
 
-const LangContext = createContext(null);
-
 export default () => {
   const { lang, setLang, currentLang } = useLang();
+  const { mode, setMode } = useMode();
+
   return (
-    <LangContext.Provider value={{ lang, setLang, currentLang } as any}>
-      <Layout style={{ height: '100%' }}>
+    <RootContext.Provider value={{ lang, setLang, currentLang, mode, setMode }}>
+      <Layout style={{ minHeight: '100%' }}>
         <Header />
         <Content />
-        <Footer style={{ textAlign: 'center' }}>Copyright Uyarn. All Rights Reserved</Footer>
+        <Footer style={{ textAlign: 'center' }}>
+          <p>Copyright Uyarn. Powered By TDesign & Notion.</p>
+          <p>All Rights Reserved</p>
+        </Footer>
       </Layout>
-    </LangContext.Provider>
+    </RootContext.Provider>
   );
 };

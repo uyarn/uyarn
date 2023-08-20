@@ -19,6 +19,8 @@ export default (params) => {
         '@/hooks': path.resolve(__dirname, './src/hooks'),
         '@/types': path.resolve(__dirname, './src/types'),
         '@/styles': path.resolve(__dirname, './src/styles'),
+        '@/layouts': path.resolve(__dirname, './src/layouts'),
+        '@/requests': path.resolve(__dirname, './src/requests'),
       },
     },
 
