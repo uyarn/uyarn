@@ -1,0 +1,12 @@
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+.t-layout__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

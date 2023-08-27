@@ -1,12 +1,33 @@
 {
+  "root": true,
   "extends": [
-    "alloy",
-    "alloy/react"
+    "airbnb-base",
+    "prettier", // conflict between prettier and eslint, prettier config first
+    "plugin:react/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended"
   ],
-  "include": [
-    "client"
-  ],
+  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
-    "no-unused-vars": "error"
+    "react/display-name": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "modifiers": ["const"],
+        "format": null
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/ban-types": "off"
   }
 }

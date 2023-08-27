@@ -1,8 +1,15 @@
-node_modules
-dist
-**.mp4
+# MacOS
 .DS_Store
-client/consts/graphql.ts
 
-yarn-error.log
+# node_modules
+node_modules
+
+# lock files
 package-lock.json
+yarn.lock
+
+# cache
+.eslintcache
+
+# build
+dist

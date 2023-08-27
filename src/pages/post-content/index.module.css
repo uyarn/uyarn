@@ -1,0 +1,10 @@
+.pagePostContent {
+  padding: 20px 10%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+:global(.notion) {
+  --bg-color: var(--td-bg-color-container) !important;
+}

@@ -1,0 +1,8 @@
+.pagePosts {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 992px;
+  justify-content: space-between;
+}
