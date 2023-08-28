@@ -3,8 +3,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  max-width: 100%;
 }
 
 :global(.notion) {
+  width: 100%;
+  font-size: 14px;
   --bg-color: var(--td-bg-color-container) !important;
+}
+
+:global(.notion-text) {
+  font-size: 14px;
 }

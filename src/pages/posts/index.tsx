@@ -50,12 +50,14 @@ export default () => {
             ))}
 
             <h3>{post.properties?.Name?.title[0]?.plain_text}</h3>
-            <p>{post.properties?.PostDate?.date?.start}</p>
-            <div
-              style={{ textAlign: 'right', cursor: 'pointer' }}
-              onClick={useLinkClickHandler(`/posts/${post.id.replace(/-/g, '')}`)}
-            >
-              View Detail
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <p>{post.properties?.PostDate?.date?.start}</p>
+              <p
+                style={{ textAlign: 'right', cursor: 'pointer' }}
+                onClick={useLinkClickHandler(`/posts/${post.id.replace(/-/g, '')}`)}
+              >
+                View Detail
+              </p>
             </div>
           </div>
         </Card>

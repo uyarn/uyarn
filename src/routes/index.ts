@@ -16,6 +16,7 @@ const routes: IRouter[] = [
   {
     path: '/',
     redirect: '/posts',
+    meta: { hidden: true },
   },
   {
     path: '/about',

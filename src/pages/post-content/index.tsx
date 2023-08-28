@@ -14,6 +14,7 @@ import { EThemes } from '@/hooks/useMode';
 import Style from './index.module.css';
 
 import 'react-notion-x/src/styles.css';
+import 'prismjs/themes/prism-tomorrow.css';
 
 export default () => {
   const { pathname } = useLocation();
