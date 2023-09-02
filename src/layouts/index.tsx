@@ -1,5 +1,7 @@
 import React from 'react';
 import { Layout } from 'tdesign-react';
+import { Analytics } from '@vercel/analytics/react';
+
 import Content from './Content';
 import Header from './Header';
 import useLang from '@/hooks/useLang';
@@ -22,6 +24,7 @@ export default () => {
           <p>Copyright Uyarn. Powered By TDesign & Notion.</p>
           <p>All Rights Reserved</p>
         </Footer>
+        <Analytics />
       </Layout>
     </RootContext.Provider>
   );
