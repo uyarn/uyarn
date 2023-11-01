@@ -4,5 +4,5 @@
   flex-wrap: wrap;
   gap: 16px;
   max-width: 992px;
-  justify-content: space-between;
+  justify-content: center;
 }

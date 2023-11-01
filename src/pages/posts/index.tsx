@@ -17,7 +17,7 @@ export default () => {
           style={{ width: '320px' }}
           cover={
             <Image
-              src={post.cover?.file?.url}
+              src={post.cover?.file?.url || post.cover?.external?.url}
               style={{ width: '320px', height: '180px' }}
               lazy
               loading={
