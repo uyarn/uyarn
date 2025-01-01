@@ -24,8 +24,8 @@
     "react-notion-x": "^6.16.0",
     "react-router-dom": "^6.21.1",
     "swr": "^2.2.4",
-    "tdesign-icons-react": "0.3.0",
-    "tdesign-react": "^1.4.3"
+    "tdesign-icons-react": "0.4.2",
+    "tdesign-react": "^1.10.4"
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",
