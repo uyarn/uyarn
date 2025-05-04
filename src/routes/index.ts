@@ -33,16 +33,11 @@ const routes: IRouter[] = [
     Component: lazy(() => import('@/pages/post-content/index')),
     meta: { hidden: true },
   },
-  // {
-  //   path: '/projects',
-  //   title: 'Projects',
-  //   Component: lazy(() => import('@/pages/projects/index')),
-  // },
-  // {
-  //   path: '/resume',
-  //   title: 'Resume',
-  //   Component: lazy(() => import('@/pages/resume/index')),
-  // },
+  {
+    path: '/album',
+    title: 'Album',
+    Component: lazy(() => import('@/pages/album/index')),
+  },
 ];
 
 export default routes;
