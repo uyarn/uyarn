@@ -28,7 +28,7 @@ export default () => {
   return (
     <Space direction="vertical" style={{ alignItems: 'center' }}>
       <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.BreadcrumbItem onClick={() => navigate('/albums')}>albums</Breadcrumb.BreadcrumbItem>
+        <Breadcrumb.BreadcrumbItem onClick={() => navigate('/albums')}>Albums</Breadcrumb.BreadcrumbItem>
         <Breadcrumb.BreadcrumbItem>{albumName}</Breadcrumb.BreadcrumbItem>
       </Breadcrumb>
       {albumType === 'file' ? (
