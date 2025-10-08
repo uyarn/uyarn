@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Space, Image, Typography } from 'tdesign-react';
-import { useLinkClickHandler } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default () => {
   const [album, setAlbum] = useState<Array<any>>([]);
+  const navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  useEffect(async () => {
-    const res = await fetch('https://1251590861-3vml8627u8.ap-shanghai.tencentscf.com/images');
-    const images = await res.json();
-    setAlbum(images);
+  function handleClick(link: string) {
+    navigate(link);
+  }
+  useEffect(() => {
+    const getAlbums = async () => {
+      const res = await fetch('https://1251590861-3vml8627u8.ap-shanghai.tencentscf.com/images');
+      const images = await res.json();
+      setAlbum(images || []);
+    };
+    getAlbums();
   }, []);
 
   return (
     <div className="pages-album">
       <Space breakLine size={24} style={{ justifyContent: 'center' }}>
-        {album.map((i) => (
+        {album?.map?.((i) => (
           <Space direction="vertical" key={i.Preview} align="center" style={{ cursor: 'pointer' }}>
             <Image
               src={i.Preview}
-              style={{ width: 160, height: 160 }}
+              style={{ width: 240, height: 240 }}
               fit="contain"
-              onClick={() => useLinkClickHandler('/album/')}
+              onClick={() => handleClick(`/albums/${i.name}`)}
             />
             <Typography.Text>{i.name}</Typography.Text>
           </Space>

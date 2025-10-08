@@ -34,13 +34,13 @@ const routes: IRouter[] = [
     meta: { hidden: true },
   },
   {
-    path: '/album',
-    title: 'Album',
-    Component: lazy(() => import('@/pages/album/index')),
+    path: '/albums',
+    title: 'Albums',
+    Component: lazy(() => import('@/pages/albums/index')),
   },
   {
-    path: '/album/:albumName',
-    Component: lazy(() => import('@/pages/album/index')),
+    path: '/albums/:id',
+    Component: lazy(() => import('@/pages/album-content/index')),
     meta: { hidden: true },
   },
 ];
