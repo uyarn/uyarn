@@ -10,27 +10,44 @@ export default () => {
   const [albumType, setAlbumType] = useState('');
   const albumName: string = useMemo(() => pathname.split('/').pop(), [pathname]) || '';
   const [images, setImages] = useState<Array<any>>([]);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     const getAlbums = async () => {
-      const res = await fetch('https://1251590861-3vml8627u8.ap-shanghai.tencentscf.com/images');
-      const albums = await res.json();
-      const currentAlbum = albums.find((album: any) => album.name.toLowerCase() === albumName.toLowerCase());
-      const imgs = currentAlbum.children.map((v: any) => (v.type === 'file' ? v.originPath : v));
-      setAlbumType(currentAlbum.children[0].type);
-      setImages(imgs);
+      try {
+        const res = await fetch('https://1251590861-3vml8627u8.ap-shanghai.tencentscf.com/images');
+        if (!res.ok) {
+          throw new Error(`Failed to fetch albums: ${res.status}`);
+        }
+
+        const albums = await res.json();
+        const currentAlbum = Array.isArray(albums)
+          ? albums.find((album: any) => album.name.toLowerCase() === albumName.toLowerCase())
+          : undefined;
+        if (!currentAlbum?.children?.length) {
+          throw new Error(`Album not found: ${albumName}`);
+        }
+
+        const imgs = currentAlbum.children.map((v: any) => (v.type === 'file' ? v.originPath : v));
+        setAlbumType(currentAlbum.children[0].type);
+        setImages(imgs);
+      } catch {
+        setAlbumType('');
+        setImages([]);
+        setError('相册内容加载失败，请稍后重试');
+      }
     };
     getAlbums();
-  }, []);
+  }, [albumName]);
 
-  if (!images) return null;
   return (
     <Space direction="vertical" style={{ alignItems: 'center' }}>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.BreadcrumbItem onClick={() => navigate('/albums')}>Albums</Breadcrumb.BreadcrumbItem>
         <Breadcrumb.BreadcrumbItem>{albumName}</Breadcrumb.BreadcrumbItem>
       </Breadcrumb>
+      {error && <Typography.Text theme="danger">{error}</Typography.Text>}
       {albumType === 'file' ? (
         <Space breakLine size={16} style={{ justifyContent: 'center' }}>
           {images.map((imgSrc, index) => {

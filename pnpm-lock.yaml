@@ -30,11 +30,11 @@ importers:
         specifier: ^2.4.1
         version: 2.4.1(react@18.3.1)
       tdesign-icons-react:
-        specifier: 0.6.0
-        version: 0.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.6.7
+        version: 0.6.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tdesign-react:
-        specifier: ^1.17.1
-        version: 1.17.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.18.1
+        version: 1.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@babel/core':
         specifier: ^7.29.7
@@ -2815,20 +2815,14 @@ packages:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
     engines: {node: '>=6'}
 
-  tdesign-icons-react@0.6.0:
-    resolution: {integrity: sha512-twludUpJV9Eoq5CV5nFDjoscg61uzXb2uYZmzTX2VA8kaiZ8rjKuIkabvx686H/TOBfriizy5ODFliBhbpaXHw==}
+  tdesign-icons-react@0.6.7:
+    resolution: {integrity: sha512-+CYNcnIeuXM1fxXh9Lwwt/RTIOh+KQ0RUKsCitjvPwhnzx1y61v3ImtWJX81kC3WjJoP2a7MmHewVsypZswpbg==}
     peerDependencies:
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
 
-  tdesign-icons-react@0.6.4:
-    resolution: {integrity: sha512-USAoi9vBWcwcJT45VqR3dRqX1MeAsn/RhHVx4bLwplhrlvE80ZQ1N9V+6F3HqE1Qe9mMDbtRM8Ul80+lALScww==}
-    peerDependencies:
-      react: '>=16.13.1'
-      react-dom: '>=16.13.1'
-
-  tdesign-react@1.17.1:
-    resolution: {integrity: sha512-fXQv+10uIov2GzcOtklhH9gPT/BTVeDgGFIvESlg10Hn/C71/h1wlkeB5V0oehMLuyShnfdW/kV8DvonPzEUeA==}
+  tdesign-react@1.18.1:
+    resolution: {integrity: sha512-EzM138dneV8UOISO6xg2iCVsm1YSNH359b0dinASDyZ6NEKLqN0jO4enD0jvqUDgzkLgg6D/LehHYZLhB/jZGQ==}
     peerDependencies:
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
@@ -4354,7 +4348,7 @@ snapshots:
 
   dom-helpers@5.2.1:
     dependencies:
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.29.7
       csstype: 3.2.3
 
   dot-case@3.0.4:
@@ -5749,7 +5743,7 @@ snapshots:
 
   react-transition-group@4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.29.7
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
@@ -6165,21 +6159,14 @@ snapshots:
 
   tapable@2.3.3: {}
 
-  tdesign-icons-react@0.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  tdesign-icons-react@0.6.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.29.7
       classnames: 2.5.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  tdesign-icons-react@0.6.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      '@babel/runtime': 7.26.10
-      classnames: 2.5.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
-  tdesign-react@1.17.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  tdesign-react@1.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.26.10
       '@popperjs/core': 2.11.8
@@ -6197,7 +6184,7 @@ snapshots:
       react-is: 18.3.1
       react-transition-group: 4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       sortablejs: 1.15.7
-      tdesign-icons-react: 0.6.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      tdesign-icons-react: 0.6.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tslib: 2.3.1
       validator: 13.15.35
 
