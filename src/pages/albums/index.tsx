@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Space, Image, Typography } from 'tdesign-react';
 import { useNavigate } from 'react-router-dom';
+import RootContext from '@/layouts/rootContext';
 
 export default () => {
   const [album, setAlbum] = useState<Array<any>>([]);
-  const [error, setError] = useState('');
+  const [hasError, setHasError] = useState(false);
+  const { currentLang } = useContext(RootContext);
   const navigate = useNavigate();
 
   function handleClick(link: string) {
@@ -22,7 +24,7 @@ export default () => {
         setAlbum(Array.isArray(images) ? images : []);
       } catch {
         setAlbum([]);
-        setError('相册加载失败，请稍后重试');
+        setHasError(true);
       }
     };
     getAlbums();
@@ -30,7 +32,7 @@ export default () => {
 
   return (
     <div className="pages-album">
-      {error && <Typography.Text theme="danger">{error}</Typography.Text>}
+      {hasError && <Typography.Text theme="danger">{currentLang.albums.loadError}</Typography.Text>}
       <Space breakLine size={24} style={{ justifyContent: 'center' }}>
         {album?.map?.((i) => (
           <Space direction="vertical" key={i.Preview} align="center" style={{ cursor: 'pointer' }}>

@@ -16,6 +16,7 @@ function useLang() {
   useEffect(() => {
     const text = lang === ELang.zhCN ? cn : en;
     setCurrentText(text);
+    document.documentElement.lang = lang || ELang.enUS;
   }, [lang]);
 
   return {

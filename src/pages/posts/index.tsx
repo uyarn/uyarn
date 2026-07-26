@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, Image, Loading, Tag } from 'tdesign-react';
 import { useLinkClickHandler } from 'react-router-dom';
 
 import queryPostList from '@/requests/query-post-list';
+import RootContext from '@/layouts/rootContext';
 import Style from './index.module.css';
 
 export default () => {
   const { data: postList } = queryPostList();
+  const { currentLang } = useContext(RootContext);
   return (
     <div className={Style.pagePosts}>
       {postList.map((post: Record<string, any>, index: number) => (
@@ -56,7 +58,7 @@ export default () => {
                 style={{ textAlign: 'right', cursor: 'pointer' }}
                 onClick={useLinkClickHandler(`/posts/${post.id.replace(/-/g, '')}`)}
               >
-                View Detail
+                {currentLang.posts.viewDetail}
               </p>
             </div>
           </div>

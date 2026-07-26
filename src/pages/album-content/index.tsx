@@ -1,16 +1,18 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { ImageViewer, Image, Space, Typography, Breadcrumb } from 'tdesign-react';
 import { BrowseIcon } from 'tdesign-icons-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import type { ImageViewerProps } from 'tdesign-react';
+import RootContext from '@/layouts/rootContext';
 
 export default () => {
   const { pathname } = useLocation();
   const [albumType, setAlbumType] = useState('');
   const albumName: string = useMemo(() => pathname.split('/').pop(), [pathname]) || '';
   const [images, setImages] = useState<Array<any>>([]);
-  const [error, setError] = useState('');
+  const [hasError, setHasError] = useState(false);
+  const { currentLang } = useContext(RootContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export default () => {
       } catch {
         setAlbumType('');
         setImages([]);
-        setError('相册内容加载失败，请稍后重试');
+        setHasError(true);
       }
     };
     getAlbums();
@@ -44,10 +46,12 @@ export default () => {
   return (
     <Space direction="vertical" style={{ alignItems: 'center' }}>
       <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.BreadcrumbItem onClick={() => navigate('/albums')}>Albums</Breadcrumb.BreadcrumbItem>
+        <Breadcrumb.BreadcrumbItem onClick={() => navigate('/albums')}>
+          {currentLang.albums.title}
+        </Breadcrumb.BreadcrumbItem>
         <Breadcrumb.BreadcrumbItem>{albumName}</Breadcrumb.BreadcrumbItem>
       </Breadcrumb>
-      {error && <Typography.Text theme="danger">{error}</Typography.Text>}
+      {hasError && <Typography.Text theme="danger">{currentLang.albums.contentLoadError}</Typography.Text>}
       {albumType === 'file' ? (
         <Space breakLine size={16} style={{ justifyContent: 'center' }}>
           {images.map((imgSrc, index) => {

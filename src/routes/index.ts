@@ -4,7 +4,7 @@ import { BrowserRouterProps } from 'react-router-dom';
 export interface IRouter {
   path: string;
   redirect?: string;
-  title?: string;
+  titleKey?: string;
   Component?: React.FC<BrowserRouterProps>;
   children?: IRouter[];
   meta?: {
@@ -20,12 +20,12 @@ const routes: IRouter[] = [
   },
   {
     path: '/about',
-    title: 'About',
+    titleKey: 'about',
     Component: lazy(() => import('@/pages/about/index')),
   },
   {
     path: '/posts',
-    title: 'Posts',
+    titleKey: 'posts',
     Component: lazy(() => import('@/pages/posts/index')),
   },
   {
@@ -35,7 +35,7 @@ const routes: IRouter[] = [
   },
   {
     path: '/albums',
-    title: 'Albums',
+    titleKey: 'albums',
     Component: lazy(() => import('@/pages/albums/index')),
   },
   {

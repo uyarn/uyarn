@@ -26,7 +26,7 @@ export default () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const { pathname: currentPath } = useLocation();
 
-  const { setLang, lang, mode, setMode } = useContext(RootContext);
+  const { setLang, lang, currentLang, mode, setMode } = useContext(RootContext);
 
   const handleToggleLang = () => {
     if (lang === ELang.enUS) setLang(ELang.zhCN);
@@ -67,7 +67,7 @@ export default () => {
           .filter((route) => !route.meta?.hidden)
           .map((route) => (
             <MenuItem value={route.path} key={route.path} onClick={() => navigateTo(route.path)}>
-              <span>{route.title}</span>
+              <span>{route.titleKey ? currentLang.navigation[route.titleKey] : ''}</span>
             </MenuItem>
           ))}
       </HeadMenu>
@@ -88,7 +88,7 @@ export default () => {
             <Dropdown
               popupProps={{ visible: menuVisible, onVisibleChange: handleVisibleChange }}
               options={visibleRouter.map((route) => ({
-                content: route.title,
+                content: route.titleKey ? currentLang.navigation[route.titleKey] : '',
                 onClick: () => navigateTo(route.path),
               }))}
               panelBottomContent={
