@@ -3,6 +3,8 @@ export default {
     about: 'About',
     posts: 'Posts',
     albums: 'Albums',
+    github: 'Visit GitHub',
+    switchLanguage: 'Switch to Chinese',
   },
   about: {
     name: ['宇扬', 'wū yāng', 'Uyarn'],

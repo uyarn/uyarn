@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo } from 'react';
-import { Layout, Menu, Switch, Dropdown, Divider } from 'tdesign-react';
+import { Button, Divider, Dropdown, Layout, Menu, Switch } from 'tdesign-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   MoonIcon,
@@ -29,9 +29,35 @@ export default () => {
   const { setLang, lang, currentLang, mode, setMode } = useContext(RootContext);
 
   const handleToggleLang = () => {
-    if (lang === ELang.enUS) setLang(ELang.zhCN);
-    else setLang(ELang.enUS);
+    const nextLang = lang === ELang.enUS ? ELang.zhCN : ELang.enUS;
+    setLang(nextLang);
   };
+
+  const handleOpenGithub = () => {
+    window.open('https://github.com/uyarn', '_blank', 'noopener,noreferrer');
+  };
+
+  const githubButton = (
+    <Button
+      aria-label={currentLang.navigation.github}
+      shape="square"
+      theme="default"
+      variant="text"
+      icon={<LogoGithubFilledIcon />}
+      onClick={handleOpenGithub}
+    />
+  );
+
+  const languageButton = (
+    <Button
+      aria-label={currentLang.navigation.switchLanguage}
+      shape="square"
+      theme="default"
+      variant="text"
+      icon={<Translate1Icon />}
+      onClick={handleToggleLang}
+    />
+  );
 
   const handleChangeMode = (currentMode: EThemes) => {
     setMode(currentMode);
@@ -50,9 +76,9 @@ export default () => {
         className="desktop-view"
         logo={<UyarnProfile style={{ fontSize: '50px' }} onClick={() => navigateTo('/')} />}
         operations={
-          <div style={{ fontSize: '20px' }}>
-            <LogoGithubFilledIcon onClick={() => window.open('https://github.com/uyarn', '_blank')} />
-            <Translate1Icon style={{ margin: '0 20px' }} onClick={handleToggleLang} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {githubButton}
+            {languageButton}
             <Switch
               customValue={[EThemes.light, EThemes.dark]}
               value={(mode || EThemes.dark) as any}
@@ -95,8 +121,8 @@ export default () => {
                 <div style={{ fontSize: '14px' }}>
                   <Divider />
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                    <LogoGithubFilledIcon onClick={() => window.open('https://github.com/uyarn', '_blank')} />
-                    <Translate1Icon onClick={handleToggleLang} />
+                    {githubButton}
+                    {languageButton}
                   </div>
                 </div>
               }
