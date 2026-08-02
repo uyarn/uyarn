@@ -32,7 +32,7 @@ export default () => {
 
   return (
     <div className="pages-album">
-      {hasError && <Typography.Text theme="danger">{currentLang.albums.loadError}</Typography.Text>}
+      {hasError && <Typography.Text theme="error">{currentLang.albums.loadError}</Typography.Text>}
       <Space breakLine size={24} style={{ justifyContent: 'center' }}>
         {album?.map?.((i) => (
           <Space direction="vertical" key={i.Preview} align="center" style={{ cursor: 'pointer' }}>

@@ -51,7 +51,7 @@ export default () => {
         </Breadcrumb.BreadcrumbItem>
         <Breadcrumb.BreadcrumbItem>{albumName}</Breadcrumb.BreadcrumbItem>
       </Breadcrumb>
-      {hasError && <Typography.Text theme="danger">{currentLang.albums.contentLoadError}</Typography.Text>}
+      {hasError && <Typography.Text theme="error">{currentLang.albums.contentLoadError}</Typography.Text>}
       {albumType === 'file' ? (
         <Space breakLine size={16} style={{ justifyContent: 'center' }}>
           {images.map((imgSrc, index) => {
@@ -137,7 +137,12 @@ export default () => {
               );
             };
             return (
-              <ImageViewer key={index} trigger={trigger} images={i.children.map((v) => v.originPath)} zIndex={10000} />
+              <ImageViewer
+                key={index}
+                trigger={trigger}
+                images={i.children.map((v: any) => v.originPath)}
+                zIndex={10000}
+              />
             );
           })}
         </Space>

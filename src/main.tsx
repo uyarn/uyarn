@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import 'tdesign-react/es/style/index.css';
 
 import '@/styles/theme.css';
 import '@/styles/reset.css';

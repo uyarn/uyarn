@@ -43,6 +43,11 @@ const routes: IRouter[] = [
     Component: lazy(() => import('@/pages/album-content/index')),
     meta: { hidden: true },
   },
+  {
+    path: '/tools',
+    titleKey: 'tools',
+    Component: lazy(() => import('@/pages/tools/index')),
+  },
 ];
 
 export default routes;

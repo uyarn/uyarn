@@ -26,6 +26,10 @@ export default (params) => {
 
     plugins: [svgr(), react()],
 
+    optimizeDeps: {
+      exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'],
+    },
+
     build: {
       cssCodeSplit: false,
     },
