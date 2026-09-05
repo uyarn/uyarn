@@ -1,12 +1,13 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { Image } from 'tdesign-react';
+import { Image, ImageViewer } from 'tdesign-react';
 
 import RootContext from '@/layouts/rootContext';
 import { ELang } from '@/hooks/useLang';
 import { EThemes } from '@/hooks/useMode';
-import { tripRecords } from './trips';
+import { destinationMetadata } from './trips';
+import type { TripRecord } from './trips';
 import styles from './index.module.css';
 
 const HOME: [number, number] = [22.5431, 114.0579];
@@ -62,15 +63,41 @@ function findAlbum(nodes: AlbumNode[], name: string): AlbumNode | undefined {
   return undefined;
 }
 
+function recordsFromTravelAlbum(nodes: AlbumNode[]): TripRecord[] {
+  const travel = nodes.find((node) => node.type === 'directory' && node.name.toLowerCase() === 'travel');
+  if (!travel?.children) return [];
+
+  return travel.children
+    .map((album): TripRecord | null => {
+      const match = album.name.match(/^(\d{4})\.(\d{2})-(.+)$/);
+      if (!match || album.type !== 'directory') return null;
+      const [, year, month, rawDestination] = match;
+      const metadata = destinationMetadata[rawDestination.toLowerCase()];
+      if (!metadata) return null;
+      const destination = rawDestination.charAt(0).toUpperCase() + rawDestination.slice(1);
+      return {
+        date: `${year}-${month}-01`,
+        destination,
+        country: metadata.country,
+        coordinates: metadata.coordinates,
+        album: album.name,
+      };
+    })
+    .filter((record): record is TripRecord => record !== null)
+    .sort((first, second) => second.date.localeCompare(first.date));
+}
+
 const TripGlobe = ({
   active,
   dark,
+  records,
   focusVersion,
   resetVersion,
   onSelect,
 }: {
   active: number | null;
   dark: boolean;
+  records: TripRecord[];
   focusVersion: number;
   resetVersion: number;
   onSelect: (index: number) => void;
@@ -123,7 +150,7 @@ const TripGlobe = ({
 
     const earthGroup = new THREE.Group();
     earthGroup.quaternion.copy(northUpOrientation(
-      sceneActive === null ? INITIAL_FOCUS : tripRecords[sceneActive].coordinates,
+      sceneActive === null || !records[sceneActive] ? INITIAL_FOCUS : records[sceneActive].coordinates,
     ));
     scene.add(earthGroup);
 
@@ -202,7 +229,7 @@ const TripGlobe = ({
     const pins: THREE.Mesh[] = [];
     const arcs: THREE.Line[] = [];
     const origin = pointOnEarth(HOME, EARTH_RADIUS * 1.016);
-    tripRecords.forEach((trip, index) => {
+    records.forEach((trip, index) => {
       const destination = pointOnEarth(trip.coordinates, EARTH_RADIUS * 1.018);
       const distance = origin.distanceTo(destination);
       const midpoint = origin.clone().add(destination).multiplyScalar(0.5).normalize().multiplyScalar(EARTH_RADIUS + 0.18 + distance * 0.15);
@@ -305,7 +332,7 @@ const TripGlobe = ({
       mount.removeChild(renderer.domElement);
       stateRef.current = null;
     };
-  }, [dark]);
+  }, [dark, records]);
 
   useEffect(() => {
     const globeState = stateRef.current;
@@ -318,11 +345,11 @@ const TripGlobe = ({
       const material = arc.material as THREE.LineBasicMaterial;
       material.opacity = index === active ? 0.95 : 0.22;
     });
-    if (active === null) return;
-    globeState.targetQuaternion = northUpOrientation(tripRecords[active].coordinates);
+    if (active === null || !records[active]) return;
+    globeState.targetQuaternion = northUpOrientation(records[active].coordinates);
     globeState.targetDistance = 5.25;
     globeState.controls.autoRotate = false;
-  }, [active, focusVersion]);
+  }, [active, focusVersion, records]);
 
   useEffect(() => {
     if (resetVersion === 0) return;
@@ -343,16 +370,21 @@ export default () => {
   const [focusVersion, setFocusVersion] = useState(0);
   const [resetVersion, setResetVersion] = useState(0);
   const [albums, setAlbums] = useState<AlbumNode[]>([]);
+  const [records, setRecords] = useState<TripRecord[]>([]);
   const [albumLoading, setAlbumLoading] = useState(true);
+  const [viewerVisible, setViewerVisible] = useState(false);
+  const [viewerIndex, setViewerIndex] = useState(0);
   const selectTrip = useCallback((index: number) => {
     setActive(index);
     setFocusVersion((version) => version + 1);
+    setViewerVisible(false);
   }, []);
-  const selected = active === null ? null : tripRecords[active];
+  const selected = active === null ? null : records[active];
   const selectedAlbum = selected ? findAlbum(albums, selected.album) : undefined;
-  const albumImages = selectedAlbum?.children
+  const remoteAlbumImages = selectedAlbum?.children
     ?.filter((node) => node.type === 'file' && node.originPath)
     .map((node) => node.originPath as string) || [];
+  const albumImages = remoteAlbumImages;
 
   useEffect(() => {
     let mounted = true;
@@ -362,7 +394,11 @@ export default () => {
         return response.json();
       })
       .then((data) => {
-        if (mounted) setAlbums(Array.isArray(data) ? data : []);
+        if (mounted) {
+          const albumNodes = Array.isArray(data) ? data : [];
+          setAlbums(albumNodes);
+          setRecords(recordsFromTravelAlbum(albumNodes));
+        }
       })
       .catch(() => {
         if (mounted) setAlbums([]);
@@ -377,8 +413,9 @@ export default () => {
 
   const resetGlobe = (event: React.MouseEvent<HTMLElement>) => {
     const target = event.target as HTMLElement;
-    if (target.closest('[data-destinations-interactive]')) return;
+    if (viewerVisible || target.closest('[class*="t-image-viewer"]') || target.closest('[data-destinations-interactive]')) return;
     setActive(null);
+    setViewerVisible(false);
     setResetVersion((version) => version + 1);
   };
 
@@ -387,7 +424,7 @@ export default () => {
       <section className={`${styles.hero} ${selected ? styles.hasAlbum : styles.noAlbum}`}>
         <div className={styles.intro}>
           <div className={styles.destinationList} aria-label="Trip destinations" data-destinations-interactive>
-            {tripRecords.map((trip, index) => (
+            {records.map((trip, index) => (
               <button
                 type="button"
                 key={`${trip.date}-${trip.destination}`}
@@ -405,7 +442,7 @@ export default () => {
           </div>
         </div>
         <div className={styles.globeWrap} data-destinations-interactive>
-          <TripGlobe active={active} dark={dark} focusVersion={focusVersion} resetVersion={resetVersion} onSelect={selectTrip} />
+          <TripGlobe active={active} dark={dark} records={records} focusVersion={focusVersion} resetVersion={resetVersion} onSelect={selectTrip} />
           <div className={styles.controls}><span>DRAG TO ORBIT</span><i /><span>SCROLL TO ZOOM</span></div>
         </div>
         {selected && (
@@ -426,11 +463,24 @@ export default () => {
                     fit="cover"
                     lazy
                     className={styles.albumImage}
+                    onClick={() => {
+                      setViewerIndex(index);
+                      setViewerVisible(true);
+                    }}
                   />
                 ))}
                 {albumImages.length > 3 && <span className={styles.morePhotos}>+{albumImages.length - 3} photos</span>}
               </div>
             )}
+            <ImageViewer
+              images={albumImages}
+              index={viewerIndex}
+              visible={viewerVisible}
+              trigger={() => null}
+              zIndex={10000}
+              onIndexChange={(index) => setViewerIndex(index)}
+              onClose={() => setViewerVisible(false)}
+            />
           </aside>
         )}
       </section>

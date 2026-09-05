@@ -27,8 +27,9 @@
 .albumHeading span { color: #788599; font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .albumHeading strong { font: 500 23px/1.15 Georgia, serif; }
 .albumGrid { position: relative; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 210px 120px; gap: 6px; }
-.albumImage { width: 100%; height: 100%; overflow: hidden; border-radius: 2px; background: #111927; }
-.albumImage:first-child { grid-column: 1 / -1; }
+.albumGrid > * { min-width: 0; min-height: 0; }
+.albumGrid > :first-child { grid-column: 1 / -1; }
+.albumImage { width: 100%; height: 100%; overflow: hidden; border-radius: 2px; background: #111927; cursor: zoom-in; }
 .albumStatus { display: grid; min-height: 330px; place-items: center; color: #667389; border: 1px solid #1c2a3c; font-size: 11px; letter-spacing: .08em; }
 .morePhotos { position: absolute; right: 8px; bottom: 8px; padding: 5px 8px; color: #fff; background: rgba(2, 5, 9, .75); font-size: 9px; letter-spacing: .08em; }
 .light .destinationList { border-color: #afc2cc; scrollbar-color: #8da3af transparent; }
@@ -43,11 +44,23 @@
 .light .albumImage { background: #d4e1e6; }
 .light .albumStatus { color: #607789; border-color: #b7c9d1; }
 @media (max-width: 800px) {
-  .hero { height: auto; min-height: auto; max-height: none; grid-template-columns: 1fr; gap: 0; padding: 52px 24px 0; }
+  .page { overflow-x: hidden; }
+  .hero { height: auto; min-height: calc(100vh - 56px); max-height: none; display: flex; flex-direction: column; gap: 12px; padding: 22px 16px 40px; }
   .hero.noAlbum, .hero.hasAlbum { transform: none; }
   .intro { position: relative; top: auto; left: auto; width: 100%; transform: none; }
-  .globeWrap { width: min(440px, 100vw); height: min(440px, 100vw); min-width: 0; min-height: 0; margin: 8px auto 0; }
-  .albumPanel { max-width: none; min-height: 0; margin: 10px 0 40px; padding: 20px 0 0; border-top: 1px solid #1c2a3c; border-left: 0; }
-  .albumGrid { grid-template-rows: 220px 120px; }
-  .destinationList { max-height: 220px; }
+  .destinationList { display: flex; max-height: none; overflow-x: auto; overflow-y: hidden; gap: 8px; padding: 0 0 9px; border: 0; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .destinationList::-webkit-scrollbar { display: none; }
+  .destinationItem { flex: 0 0 148px; grid-template-columns: 22px 1fr; min-height: 62px; padding: 9px 10px; border: 1px solid #243044; border-radius: 8px; scroll-snap-align: start; }
+  .destinationItem:last-child { border-bottom: 1px solid #243044; }
+  .destinationItem:hover, .destinationItem.active { padding-left: 10px; }
+  .destinationItem time { display: none; }
+  .destinationMeta strong { font-size: 16px; }
+  .light .destinationItem, .light .destinationItem:last-child { border-color: #c7d6dc; background: rgba(255, 255, 255, .32); }
+  .globeWrap { flex: 0 0 auto; width: min(340px, calc(100vw - 32px)); height: min(340px, calc(100vw - 32px)); min-width: 0; min-height: 0; margin: 0 auto; }
+  .controls { bottom: 10px; font-size: 7px; }
+  .albumPanel { max-width: none; min-height: 0; margin: 4px 0 0; padding: 20px 0 0; border-top: 1px solid #1c2a3c; border-left: 0; }
+  .albumHeading { flex-direction: row; align-items: baseline; justify-content: space-between; }
+  .albumHeading strong { font-size: 20px; }
+  .albumGrid { grid-template-rows: 180px 100px; }
+  .albumStatus { min-height: 220px; }
 }

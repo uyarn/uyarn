@@ -21,7 +21,11 @@ export default () => {
         }
 
         const images = await res.json();
-        setAlbum(Array.isArray(images) ? images : []);
+        setAlbum(
+          Array.isArray(images)
+            ? images.filter((albumItem) => albumItem.name?.toLowerCase() !== 'travel')
+            : [],
+        );
       } catch {
         setAlbum([]);
         setHasError(true);
