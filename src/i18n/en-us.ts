@@ -3,6 +3,7 @@ export default {
     about: 'About',
     posts: 'Posts',
     albums: 'Albums',
+    destinations: 'Destinations',
     tools: 'Tools',
     github: 'Visit GitHub',
     switchLanguage: 'Switch to Chinese',

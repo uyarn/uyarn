@@ -3,6 +3,7 @@ export default {
     about: '关于',
     posts: '文章',
     albums: '相册',
+    destinations: '目的地',
     tools: '工具',
     github: '访问 GitHub',
     switchLanguage: '切换为英文',
