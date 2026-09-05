@@ -6,7 +6,6 @@ import { Image, ImageViewer } from 'tdesign-react';
 import RootContext from '@/layouts/rootContext';
 import { ELang } from '@/hooks/useLang';
 import { EThemes } from '@/hooks/useMode';
-import { destinationMetadata } from './trips';
 import type { TripRecord } from './trips';
 import styles from './index.module.css';
 
@@ -52,6 +51,7 @@ interface AlbumNode {
 }
 
 const ALBUMS_ENDPOINT = 'https://1251590861-3vml8627u8.ap-shanghai.tencentscf.com/images';
+const GEOCODING_ENDPOINT = 'https://geocoding-api.open-meteo.com/v1/search';
 
 function findAlbum(nodes: AlbumNode[], name: string): AlbumNode | undefined {
   for (let index = 0; index < nodes.length; index += 1) {
@@ -72,19 +72,41 @@ function recordsFromTravelAlbum(nodes: AlbumNode[]): TripRecord[] {
       const match = album.name.match(/^(\d{4})\.(\d{2})-(.+)$/);
       if (!match || album.type !== 'directory') return null;
       const [, year, month, rawDestination] = match;
-      const metadata = destinationMetadata[rawDestination.toLowerCase()];
-      if (!metadata) return null;
       const destination = rawDestination.charAt(0).toUpperCase() + rawDestination.slice(1);
       return {
         date: `${year}-${month}-01`,
         destination,
-        country: metadata.country,
-        coordinates: metadata.coordinates,
+        country: '',
+        coordinates: null,
         album: album.name,
       };
     })
     .filter((record): record is TripRecord => record !== null)
     .sort((first, second) => second.date.localeCompare(first.date));
+}
+
+interface GeocodingResult {
+  latitude?: number;
+  longitude?: number;
+  country?: string;
+}
+
+async function geocodeDestination(record: TripRecord): Promise<TripRecord> {
+  try {
+    const query = new URLSearchParams({ name: record.destination, count: '1', language: 'en', format: 'json' });
+    const response = await fetch(`${GEOCODING_ENDPOINT}?${query.toString()}`);
+    if (!response.ok) return record;
+    const data = await response.json() as { results?: GeocodingResult[] };
+    const location = data.results?.[0];
+    if (typeof location?.latitude !== 'number' || typeof location.longitude !== 'number') return record;
+    return {
+      ...record,
+      country: location.country || '',
+      coordinates: [location.latitude, location.longitude],
+    };
+  } catch {
+    return record;
+  }
 }
 
 const TripGlobe = ({
@@ -149,9 +171,8 @@ const TripGlobe = ({
     }
 
     const earthGroup = new THREE.Group();
-    earthGroup.quaternion.copy(northUpOrientation(
-      sceneActive === null || !records[sceneActive] ? INITIAL_FOCUS : records[sceneActive].coordinates,
-    ));
+    const initialCoordinates = sceneActive === null ? null : records[sceneActive]?.coordinates;
+    earthGroup.quaternion.copy(northUpOrientation(initialCoordinates || INITIAL_FOCUS));
     scene.add(earthGroup);
 
     const earth = new THREE.Mesh(
@@ -230,6 +251,7 @@ const TripGlobe = ({
     const arcs: THREE.Line[] = [];
     const origin = pointOnEarth(HOME, EARTH_RADIUS * 1.016);
     records.forEach((trip, index) => {
+      if (!trip.coordinates) return;
       const destination = pointOnEarth(trip.coordinates, EARTH_RADIUS * 1.018);
       const distance = origin.distanceTo(destination);
       const midpoint = origin.clone().add(destination).multiplyScalar(0.5).normalize().multiplyScalar(EARTH_RADIUS + 0.18 + distance * 0.15);
@@ -345,7 +367,7 @@ const TripGlobe = ({
       const material = arc.material as THREE.LineBasicMaterial;
       material.opacity = index === active ? 0.95 : 0.22;
     });
-    if (active === null || !records[active]) return;
+    if (active === null || !records[active]?.coordinates) return;
     globeState.targetQuaternion = northUpOrientation(records[active].coordinates);
     globeState.targetDistance = 5.25;
     globeState.controls.autoRotate = false;
@@ -393,15 +415,20 @@ export default () => {
         if (!response.ok) throw new Error(`Album request failed: ${response.status}`);
         return response.json();
       })
-      .then((data) => {
+      .then(async (data) => {
+        const albumNodes = Array.isArray(data) ? data : [];
+        const travelRecords = recordsFromTravelAlbum(albumNodes);
+        const geocodedRecords = await Promise.all(travelRecords.map(geocodeDestination));
         if (mounted) {
-          const albumNodes = Array.isArray(data) ? data : [];
           setAlbums(albumNodes);
-          setRecords(recordsFromTravelAlbum(albumNodes));
+          setRecords(geocodedRecords);
         }
       })
       .catch(() => {
-        if (mounted) setAlbums([]);
+        if (mounted) {
+          setAlbums([]);
+          setRecords([]);
+        }
       })
       .finally(() => {
         if (mounted) setAlbumLoading(false);
@@ -434,7 +461,7 @@ export default () => {
                 <span>{(index + 1).toString().padStart(2, '0')}</span>
                 <span className={styles.destinationMeta}>
                   <strong>{trip.destination}</strong>
-                  <small>{trip.country}</small>
+                  {trip.country && <small>{trip.country}</small>}
                 </span>
                 <time>{new Date(`${trip.date}T00:00:00`).toLocaleDateString(lang === ELang.zhCN ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'short' })}</time>
               </button>
