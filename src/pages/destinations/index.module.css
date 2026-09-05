@@ -58,9 +58,12 @@
   .light .destinationItem, .light .destinationItem:last-child { border-color: #c7d6dc; background: rgba(255, 255, 255, .32); }
   .globeWrap { flex: 0 0 auto; width: min(340px, calc(100vw - 32px)); height: min(340px, calc(100vw - 32px)); min-width: 0; min-height: 0; margin: 0 auto; }
   .controls { bottom: 10px; font-size: 7px; }
-  .albumPanel { max-width: none; min-height: 0; margin: 4px 0 0; padding: 20px 0 0; border-top: 1px solid #1c2a3c; border-left: 0; }
-  .albumHeading { flex-direction: row; align-items: baseline; justify-content: space-between; }
-  .albumHeading strong { font-size: 20px; }
-  .albumGrid { grid-template-rows: 180px 100px; }
-  .albumStatus { min-height: 220px; }
+  .albumPanel { width: 100%; max-width: 420px; min-height: 0; margin: 0 auto; padding: 12px 0 0; border-top: 1px solid #1c2a3c; border-left: 0; }
+  .albumHeading { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 9px; }
+  .albumHeading strong { overflow: hidden; font-size: 18px; text-overflow: ellipsis; white-space: nowrap; }
+  .albumGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: clamp(76px, 24vw, 104px); gap: 5px; }
+  .albumGrid > :first-child { grid-column: auto; }
+  .albumImage { border-radius: 5px; }
+  .albumStatus { min-height: 96px; }
+  .morePhotos { right: 6px; bottom: 6px; padding: 4px 6px; font-size: 8px; }
 }

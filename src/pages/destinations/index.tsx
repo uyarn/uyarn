@@ -475,7 +475,6 @@ export default () => {
         {selected && (
           <aside className={styles.albumPanel} aria-live="polite" data-destinations-interactive>
             <div className={styles.albumHeading}>
-              <span>Selected album</span>
               <strong>{selected.destination}</strong>
             </div>
             {albumLoading && <div className={styles.albumStatus}>Loading photos…</div>}
