@@ -67,7 +67,7 @@ export default () => {
     setMenuVisible(visible);
   };
 
-  const visibleRouter = useMemo(() => routes.filter((route) => !route.meta?.hidden), []);
+  const visibleRouter = useMemo(() => routes.filter((route) => route.visibility !== false), []);
   return (
     <Header>
       <HeadMenu
@@ -90,7 +90,7 @@ export default () => {
         style={{ padding: '0 10px' }}
       >
         {routes
-          .filter((route) => !route.meta?.hidden)
+          .filter((route) => route.visibility !== false)
           .map((route) => (
             <MenuItem value={route.path} key={route.path} onClick={() => navigateTo(route.path)}>
               <span>{route.titleKey ? currentLang.navigation[route.titleKey] : ''}</span>

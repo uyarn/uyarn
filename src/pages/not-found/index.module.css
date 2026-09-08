@@ -1,0 +1,65 @@
+.page {
+  position: relative;
+  display: grid;
+  min-height: calc(100vh - 56px);
+  overflow: hidden;
+  place-items: center;
+  box-sizing: border-box;
+  padding: 56px 32px 72px;
+  color: var(--td-text-color-primary);
+  background:
+    radial-gradient(circle at 72% 30%, color-mix(in srgb, var(--td-brand-color) 10%, transparent), transparent 28%),
+    var(--td-bg-color-page);
+}
+
+.page::before,
+.page::after {
+  position: absolute;
+  width: min(64vw, 820px);
+  height: min(64vw, 820px);
+  border: 1px solid color-mix(in srgb, var(--td-text-color-primary) 8%, transparent);
+  border-radius: 50%;
+  content: '';
+  pointer-events: none;
+}
+
+.page::before { right: -28vw; top: -32vw; }
+.page::after { right: -20vw; top: -24vw; }
+
+.content { position: relative; z-index: 1; width: min(100%, 720px); text-align: center; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--td-text-color-secondary);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .22em;
+}
+
+.eyebrow span { width: 28px; height: 1px; background: var(--td-brand-color); }
+
+.content h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0 4px;
+  font: 400 clamp(118px, 19vw, 220px)/.9 Georgia, 'Times New Roman', serif;
+  letter-spacing: -.1em;
+}
+
+.orbit { position: relative; display: inline-grid; width: .82em; place-items: center; color: transparent; }
+.orbit::before { position: absolute; width: .57em; height: .57em; border: .025em solid var(--td-brand-color); border-radius: 50%; content: ''; }
+.orbit::after { position: absolute; width: .88em; height: .32em; border: 1px solid var(--td-text-color-secondary); border-radius: 50%; content: ''; transform: rotate(-22deg); opacity: .55; }
+.orbit i { position: absolute; z-index: 1; width: .055em; height: .055em; margin: -.24em 0 0 .62em; border-radius: 50%; background: var(--td-brand-color); box-shadow: 0 0 12px var(--td-brand-color); }
+
+.coordinate { position: absolute; right: 30px; bottom: 24px; display: flex; gap: 18px; color: var(--td-text-color-placeholder); font: 9px/1 monospace; letter-spacing: .12em; }
+
+@media (max-width: 600px) {
+  .page { min-height: calc(100svh - 56px); padding: 36px 20px 72px; }
+  .page::before,
+  .page::after { width: 110vw; height: 110vw; right: -68vw; top: -34vw; }
+  .content h1 { margin-top: 20px; font-size: clamp(108px, 42vw, 156px); }
+  .coordinate { right: 20px; bottom: 18px; left: 20px; justify-content: space-between; }
+}

@@ -5,18 +5,16 @@ export interface IRouter {
   path: string;
   redirect?: string;
   titleKey?: string;
+  visibility?: boolean;
   Component?: React.FC<BrowserRouterProps>;
   children?: IRouter[];
-  meta?: {
-    hidden?: boolean;
-  };
 }
 
 const routes: IRouter[] = [
   {
     path: '/',
     redirect: '/posts',
-    meta: { hidden: true },
+    visibility: false,
   },
   {
     path: '/about',
@@ -31,7 +29,7 @@ const routes: IRouter[] = [
   {
     path: '/posts/:id',
     Component: lazy(() => import('@/pages/post-content/index')),
-    meta: { hidden: true },
+    visibility: false,
   },
   {
     path: '/destinations',
@@ -47,12 +45,18 @@ const routes: IRouter[] = [
   {
     path: '/albums/:id',
     Component: lazy(() => import('@/pages/album-content/index')),
-    meta: { hidden: true },
+    visibility: false,
   },
   {
     path: '/tools',
     titleKey: 'tools',
+    visibility: false,
     Component: lazy(() => import('@/pages/tools/index')),
+  },
+  {
+    path: '*',
+    visibility: false,
+    Component: lazy(() => import('@/pages/not-found/index')),
   },
 ];
 
