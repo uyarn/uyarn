@@ -16,6 +16,9 @@
 .destinationMeta strong { color: #f4f7fb; font: 500 18px/1.1 Georgia, serif; }
 .destinationMeta small { color: #788599; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
 .destinationItem.active .destinationMeta strong { color: var(--brand-main); }
+.destinationSkeleton { display: grid; min-height: 64px; padding: 10px 8px 10px 0; border-bottom: 1px solid #182235; box-sizing: border-box; align-content: center; gap: 5px; }
+.destinationSkeleton:last-child { border-bottom: 0; }
+.destinationSkeleton :global(.t-skeleton__row) { align-items: center; margin: 0; }
 .globeWrap { position: relative; width: min(500px, 42vw, calc(100vh - 150px)); height: min(500px, 42vw, calc(100vh - 150px)); min-width: 400px; min-height: 400px; margin: 0 auto; }
 .globe { position: absolute; inset: 0; cursor: grab; touch-action: none; filter: drop-shadow(0 0 50px rgba(42, 103, 177, .18)); }
 .globe:active { cursor: grabbing; }
@@ -38,6 +41,7 @@
 .light .destinationMeta strong { color: #172536; }
 .light .destinationMeta small { color: #667b8c; }
 .light .destinationItem.active .destinationMeta strong { color: #b98500; }
+.light .destinationSkeleton { border-color: #c7d6dc; }
 .light .controls { color: #607789; }
 .light .albumPanel { border-color: #b7c9d1; }
 .light .albumHeading span { color: #607789; }
@@ -54,8 +58,12 @@
   .destinationItem:last-child { border-bottom: 1px solid #243044; }
   .destinationItem:hover, .destinationItem.active { padding-left: 10px; }
   .destinationItem time { display: none; }
+  .destinationSkeleton { flex: 0 0 148px; min-height: 62px; padding: 10px; border: 1px solid #243044; border-radius: 8px; scroll-snap-align: start; }
+  .destinationSkeleton:last-child { border-bottom: 1px solid #243044; }
+  .destinationSkeleton :global(.t-skeleton__col:nth-child(3)) { display: none; }
   .destinationMeta strong { font-size: 16px; }
   .light .destinationItem, .light .destinationItem:last-child { border-color: #c7d6dc; background: rgba(255, 255, 255, .32); }
+  .light .destinationSkeleton, .light .destinationSkeleton:last-child { border-color: #c7d6dc; background: rgba(255, 255, 255, .32); }
   .globeWrap { flex: 0 0 auto; width: min(340px, calc(100vw - 32px)); height: min(340px, calc(100vw - 32px)); min-width: 0; min-height: 0; margin: 0 auto; }
   .controls { bottom: 10px; font-size: 7px; }
   .albumPanel { width: 100%; max-width: 420px; min-height: 0; margin: 0 auto; padding: 12px 0 0; border-top: 1px solid #1c2a3c; border-left: 0; }

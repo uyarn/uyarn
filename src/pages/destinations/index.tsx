@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { Image, ImageViewer } from 'tdesign-react';
+import { Image, ImageViewer, Skeleton } from 'tdesign-react';
 
 import RootContext from '@/layouts/rootContext';
 import { ELang } from '@/hooks/useLang';
@@ -451,7 +451,19 @@ export default () => {
       <section className={`${styles.hero} ${selected ? styles.hasAlbum : styles.noAlbum}`}>
         <div className={styles.intro}>
           <div className={styles.destinationList} aria-label="Trip destinations" data-destinations-interactive>
-            {records.map((trip, index) => (
+            {albumLoading && Array.from({ length: 4 }, (_, index) => (
+              <Skeleton
+                key={`destination-skeleton-${index}`}
+                className={styles.destinationSkeleton}
+                animation="gradient"
+                rowCol={[[
+                  { width: '18px', height: '10px' },
+                  { width: '46%', height: '18px', marginLeft: '10px' },
+                  { width: '42px', height: '10px', marginLeft: 'auto' },
+                ]]}
+              />
+            ))}
+            {!albumLoading && records.map((trip, index) => (
               <button
                 type="button"
                 key={`${trip.date}-${trip.destination}`}
