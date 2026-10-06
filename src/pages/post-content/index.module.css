@@ -15,3 +15,11 @@
 :global(.notion-text) {
   font-size: 14px;
 }
+
+:global(.notion-page.notion-full-page) {
+  padding-bottom: 20px;
+}
+
+:global(.notion-page-content-inner > .notion-blank:not(:has(~ :not(.notion-blank)))) {
+  display: none;
+}
