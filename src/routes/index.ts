@@ -13,7 +13,7 @@ export interface IRouter {
 const routes: IRouter[] = [
   {
     path: '/',
-    redirect: '/posts',
+    redirect: '/destinations',
     visibility: false,
   },
   {
